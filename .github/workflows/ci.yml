@@ -22,3 +22,13 @@ jobs:
 
       - name: Compilar y ejecutar tests
         run: mvn test
+
+      - name: Escaneo de vulnerabilidades en dependencias
+        run: mvn org.owasp:dependency-check-maven:check
+
+      - name: Subir informe de vulnerabilidades
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: dependency-check-report
+          path: target/dependency-check-report.html
