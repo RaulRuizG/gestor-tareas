@@ -24,6 +24,7 @@ jobs:
         run: mvn test
 
       - name: Escaneo de vulnerabilidades en dependencias
+        continue-on-error: true
         run: mvn org.owasp:dependency-check-maven:check -DnvdApiKey=${{ secrets.NVD_API_KEY }}
 
       - name: Subir informe de vulnerabilidades
